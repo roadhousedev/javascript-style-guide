@@ -8,22 +8,23 @@ Based off of [AirBnB's style guide](https://github.com/airbnb/javascript).
 ## Table of Contents
 
   1. [Strings](#strings)
-  2. [Variables](#variables)
-  3. [Semicolons](#semicolons)
-  4. [Commas](#commas)
-  5. [Declaring Strict Mode](#declaring-strict-mode)
-  6. [Naming Conventions](#naming-conventions)
-  7. [Conditional Expressions](#conditional-expressions)
-  8. [Blocks](#blocks)
-  9. [Tab Spacing](#tab-spacing)
-  10. [Types](#types)
-  11. [Objects](#objects)
-  12. [Arrays](#arrays)
-  13. [Properties](#properties)
-  14. [Accessors](#accessors)
-  15. [jQuery](#jquery)
-  16. [Tools](#tools)
-  17. [License](#license)
+  1. [Variables](#variables)
+  1. [Semicolons](#semicolons)
+  1. [Commas](#commas)
+  1. [Declaring Strict Mode](#declaring-strict-mode)
+  1. [Naming Conventions](#naming-conventions)
+  1. [Conditional Expressions](#conditional-expressions)
+  1. [Blocks](#blocks)
+  1. [Comments](#comments)
+  1. [Spacing](#spacing)
+  1. [Types](#types)
+  1. [Objects](#objects)
+  1. [Arrays](#arrays)
+  1. [Properties](#properties)
+  1. [Accessors](#accessors)
+  1. [jQuery](#jquery)
+  1. [Tools](#tools)
+  1. [License](#license)
 
 ## Strings
 
@@ -204,21 +205,212 @@ Use braces when there are multi-line blocks.
   ```
 **[⬆ back to top](#table-of-contents)**
 
-##Tab Spacing
 
-Use two spaces for tabs
+## Comments
 
-```javascript
-  // bad
-  function() {
-  ∙∙∙∙return true;
-  }
+  - Use `/** ... */` for multiline comments. Include a description, specify types and values for all parameters and return values.
 
-  // good
-  function() {
-  ∙∙return true;
-  }
+    ```javascript
+    // bad
+    // make() returns a new element
+    // based on the passed in tag name
+    //
+    // @param <String> tag
+    // @return <Element> element
+    function make(tag) {
+
+      // ...stuff...
+
+      return element;
+    }
+
+    // good
+    /**
+     * make() returns a new element
+     * based on the passed in tag name
+     *
+     * @param <String> tag
+     * @return <Element> element
+     */
+    function make(tag) {
+
+      // ...stuff...
+
+      return element;
+    }
+    ```
+
+  - Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment.
+
+    ```javascript
+    // bad
+    var active = true;  // is current tab
+
+    // good
+    // is current tab
+    var active = true;
+
+    // bad
+    function getType() {
+      console.log('fetching type...');
+      // set the default type to 'no type'
+      var type = this._type || 'no type';
+
+      return type;
+    }
+
+    // good
+    function getType() {
+      console.log('fetching type...');
+
+      // set the default type to 'no type'
+      var type = this._type || 'no type';
+
+      return type;
+    }
+    ```
+
+  - Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME -- need to figure this out` or `TODO -- need to implement`.
+
+  - Use `// FIXME:` to annotate problems
+
+    ```javascript
+    function Calculator() {
+
+      // FIXME: shouldn't use a global here
+      total = 0;
+
+      return this;
+    }
+    ```
+
+  - Use `// TODO:` to annotate solutions to problems
+
+    ```javascript
+    function Calculator() {
+
+      // TODO: total should be configurable by an options param
+      this.total = 0;
+
+      return this;
+    }
   ```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+## Whitespace
+
+  - Use soft tabs set to 2 spaces
+
+    ```javascript
+    // bad
+    function() {
+    ∙∙∙∙var name;
+    }
+
+    // bad
+    function() {
+    ∙var name;
+    }
+
+    // good
+    function() {
+    ∙∙var name;
+    }
+    ```
+
+  - Place 1 space before the leading brace.
+
+    ```javascript
+    // bad
+    function test(){
+      console.log('test');
+    }
+
+    // good
+    function test() {
+      console.log('test');
+    }
+
+    // bad
+    dog.set('attr',{
+      age: '1 year',
+      breed: 'Bernese Mountain Dog'
+    });
+
+    // good
+    dog.set('attr', {
+      age: '1 year',
+      breed: 'Bernese Mountain Dog'
+    });
+    ```
+
+  - Set off operators with spaces.
+
+    ```javascript
+    // bad
+    var x=y+5;
+
+    // good
+    var x = y + 5;
+    ```
+
+  - End files with a single newline character.
+
+    ```javascript
+    // bad
+    (function(global) {
+      // ...stuff...
+    })(this);
+    ```
+
+    ```javascript
+    // bad
+    (function(global) {
+      // ...stuff...
+    })(this);↵
+    ↵
+    ```
+
+    ```javascript
+    // good
+    (function(global) {
+      // ...stuff...
+    })(this);↵
+    ```
+
+  - Use indentation when making long method chains.
+
+    ```javascript
+    // bad
+    $('#items').find('.selected').highlight().end().find('.open').updateCount();
+
+    // good
+    $('#items')
+      .find('.selected')
+        .highlight()
+        .end()
+      .find('.open')
+        .updateCount();
+
+    // bad
+    var leds = stage.selectAll('.led').data(data).enter().append('svg:svg').class('led', true)
+        .attr('width',  (radius + margin) * 2).append('svg:g')
+        .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
+        .call(tron.led);
+
+    // good
+    var leds = stage.selectAll('.led')
+        .data(data)
+      .enter().append('svg:svg')
+        .class('led', true)
+        .attr('width',  (radius + margin) * 2)
+      .append('svg:g')
+        .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
+        .call(tron.led);
+    ```
+
 **[⬆ back to top](#table-of-contents)**
 
 ## Types
