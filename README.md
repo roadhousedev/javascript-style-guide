@@ -21,7 +21,7 @@ Based off of [AirBnB's style guide](https://github.com/airbnb/javascript).
   12. [Arrays](#arrays)
   13. [Properties](#properties)
   14. [Accessors](#accessors)
-  15. [jQuery](#jQuery)
+  15. [jQuery](#jquery)
   16. [Tools](#tools)
   17. [License](#license)
 
