@@ -118,40 +118,117 @@ Don't use leading commas.
 
 **[⬆ back to top](#table-of-contents)**
 
-## Naming conventions
+## Naming Conventions
 
-  - Use descriptive naming. Avoid single letter names.
+  - Avoid single letter names. Be descriptive with your naming.
 
-  ```javascript
-  // bad
-  function t() {
-    // do something...
-  }
+    ```javascript
+    // bad
+    function q() {
+      // ...stuff...
+    }
 
-  // good
-  function test() {
-    // do something...
-  }
-  ```
+    // good
+    function query() {
+      // ..stuff..
+    }
+    ```
 
-  - Use camelCase when naming objects, functions, and instances.
+  - Use camelCase when naming objects, functions, and instances
 
-  ```javascript
-  // bad
-  var OBject = {};
-  var heres_an_object = {};
-  function c() {}
-  var u = new user({
-    name: 'Roadhouse';
-  });
+    ```javascript
+    // bad
+    var OBJEcttsssss = {};
+    var this_is_my_object = {};
+    function c() {}
+    var u = new user({
+      name: 'Bob Parr'
+    });
 
-  // good
-  var thisIsMyObject = {};
-  function thisIsMyFunction() {}
-  var user = new User({
-    name: 'Roadhouse';
-  });
-  ```
+    // good
+    var thisIsMyObject = {};
+    function thisIsMyFunction() {}
+    var user = new User({
+      name: 'Bob Parr'
+    });
+    ```
+
+  - Use PascalCase when naming constructors or classes
+
+    ```javascript
+    // bad
+    function user(options) {
+      this.name = options.name;
+    }
+
+    var bad = new user({
+      name: 'nope'
+    });
+
+    // good
+    function User(options) {
+      this.name = options.name;
+    }
+
+    var good = new User({
+      name: 'yup'
+    });
+    ```
+
+  - Use a leading underscore `_` when naming private properties
+
+    ```javascript
+    // bad
+    this.__firstName__ = 'Panda';
+    this.firstName_ = 'Panda';
+
+    // good
+    this._firstName = 'Panda';
+    ```
+
+  - When saving a reference to `this` use `_this`.
+
+    ```javascript
+    // bad
+    function() {
+      var self = this;
+      return function() {
+        console.log(self);
+      };
+    }
+
+    // bad
+    function() {
+      var that = this;
+      return function() {
+        console.log(that);
+      };
+    }
+
+    // good
+    function() {
+      var _this = this;
+      return function() {
+        console.log(_this);
+      };
+    }
+    ```
+
+  - Name your functions. This is helpful for stack traces.
+
+    ```javascript
+    // bad
+    var log = function(msg) {
+      console.log(msg);
+    };
+
+    // good
+    var log = function log(msg) {
+      console.log(msg);
+    };
+    ```
+
+  - **Note:** IE8 and below exhibit some quirks with named function expressions.  See [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) for more info.
 
 **[⬆ back to top](#table-of-contents)**
 
